@@ -6,3 +6,11 @@ jobs:
     steps:
       - name: Say hello
         run: echo "Hello from $(hostname)"
+      - name: Dump github context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump raw event payload
+        run: cat "$GITHUB_EVENT_PATH"
+      - name: List GITHUB_ variables
+        run: env | grep '^GITHUB_' | sort
